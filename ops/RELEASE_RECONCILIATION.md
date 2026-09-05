@@ -36,7 +36,7 @@ Local verification passed:
 - Isolated esbuild runtime using only the 326 data files declared in Netlify configuration, plus explicit missing-manifest fallback. This models packaging isolation and does not substitute for a live Netlify test.
 - Vite production build and whitespace checks.
 
-The mocked handler tests do not call model providers or the production database. See PR #1 for remote checks on its current head. Production deployment and database changes are separate from this reconciliation.
+The mocked handler tests do not call model providers or the production database. Publishing was blocked: the shell checkout has no push credentials, and the connected GitHub integration returned HTTP 403, `Resource not accessible by integration`, when creating a Git blob. No remote branch, PR, deployment or database was changed in this session. The tested commits are preserved in a recovery bundle. Remote checks must run after an authorized connection publishes these commits.
 
 ## Remaining clinical release work
 
