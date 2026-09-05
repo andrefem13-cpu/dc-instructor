@@ -11,8 +11,6 @@ export default function InputPanel({
   edNote, setEdNote,
   level, setLevel,
   language, setLanguage,
-  imageOn, setImageOn,
-  imagePrompt, setImagePrompt,
   onGenerate, busy, redactionMeta,
 }) {
   const [showHL1Tip, setShowHL1Tip] = useState(false);
@@ -97,27 +95,9 @@ export default function InputPanel({
         </div>
       </div>
 
-      <div>
-        <div className="flex items-center justify-between">
-          <label className="label-mono">PRN Illustration</label>
-          <button
-            type="button"
-            role="switch"
-            aria-checked={imageOn}
-            onClick={() => setImageOn(!imageOn)}
-            className={`relative w-10 h-5 rounded-full transition ${imageOn ? 'bg-accent' : 'bg-cool/15'}`}
-          >
-            <span className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-bg transition ${imageOn ? 'translate-x-5' : ''}`} />
-          </button>
-        </div>
-        {imageOn && (
-          <input
-            value={imagePrompt}
-            onChange={(e) => setImagePrompt(e.target.value)}
-            placeholder="e.g. right humerus fracture, non-displaced, lateral view"
-            className="mt-2 w-full bg-bg/60 border border-cool/15 focus:border-accent rounded-lg px-3 py-2 text-sm focus:outline-none"
-          />
-        )}
+      <div className="flex items-center justify-between">
+        <label className="label-mono">PRN Illustration</label>
+        <span className="text-[11px] text-cool/50">Temporarily unavailable</span>
       </div>
 
       <button

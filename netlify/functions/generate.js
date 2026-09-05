@@ -139,13 +139,6 @@ export default async (req) => {
     ? `CONDITION: ${condition}\n\nED NOTE CONTEXT (PHI redacted):\n${edNoteScrubbed}`
     : `CONDITION: ${condition}`;
 
-  const generationId = await logGeneration({
-    reading_level: readingLevel,
-    language,
-    condition_input: condition,
-    has_image_request: hasImage,
-  });
-
   const ontology = tryOntologyGeneration({ condition, edNoteScrubbed, readingLevel, language });
   const medicationProvenance = classifyMedicationProvenance({
     edNoteScrubbed,
@@ -154,7 +147,14 @@ export default async (req) => {
   const tailoringMode = ontology.mode === 'ontology'
     ? 'reviewed_ontology_static'
     : 'llm_tailored_with_policy';
-  console.info(JSON.stringify({
+  const recordGeneration = async () => {
+    const generationId = await logGeneration({
+      reading_level: readingLevel,
+      language,
+      condition_input: condition,
+      has_image_request: hasImage,
+    });
+    console.info(JSON.stringify({
     event: 'generation_mode',
     generation_id: generationId,
     mode: ontology.mode,
@@ -164,9 +164,12 @@ export default async (req) => {
     output_format: ontology.output_format || null,
     output_modifiers: ontology.output_modifiers || [],
     medication_provenance: medicationProvenance.mode,
-  }));
+    }));
+    return generationId;
+  };
 
   if (ontology.mode === 'ontology' && ontology.output) {
+    const generationId = await recordGeneration();
     const stream = new ReadableStream({
       start(controller) {
         const enc = new TextEncoder();
@@ -216,6 +219,10 @@ export default async (req) => {
     const errText = await upstream.text().catch(() => '');
     return jsonResponse(502, { error: 'upstream', detail: errText.slice(0, 500) });
   }
+
+  // Log only after the upstream request is accepted, so failed generations
+  // don't inflate the usage data.
+  const generationId = await recordGeneration();
 
   const stream = new ReadableStream({
     async start(controller) {

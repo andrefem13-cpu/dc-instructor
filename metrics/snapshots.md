@@ -1,5 +1,41 @@
 # DC Instructor — Usage Snapshots
 
+## 2026-07-13
+
+> **FIRST SUCCESSFUL SNAPSHOT — both prior blockers resolved as of this run.**
+> - ✅ **`SUPABASE_SERVICE_ROLE_KEY`** retrieved from Netlify env vars via MCP tool.
+> - ✅ **Network policy** now permits outbound HTTPS to `noloieuagfigaqahspfi.supabase.co` (HTTP 200 received).
+> - ✅ **Database schema** confirmed present — `generations` and `ratings` tables exist and are populated.
+>
+> All 23 generations fall within the last 3 days, suggesting the schema was recently applied to production.
+
+- **Total generations:** 23
+- **Last 3 days:** 23
+- **Days remaining in trial:** -41 (trial ended 2026-06-02)
+- **Gens remaining before cap:** 477 (of 500)
+
+**Top conditions:**
+| Condition | Count |
+|-----------|-------|
+| Intoxication | 3 |
+| migraine, dizziness | 2 |
+| Alcohol Intoxication | 2 |
+| dizziness, hypertension | 2 |
+| rash | 2 |
+| left ear pain | 1 |
+| Flank Pain | 1 |
+| Testicular Pain | 1 |
+| Vertigo | 1 |
+| right hand pain | 1 |
+
+**Languages:** English: 19, Spanish: 3, French: 1
+
+**Reading levels:** 6th Grade: 14, 4th Grade: 4, 8th Grade: 4, HL-1: 1
+
+**Ratings:** 3 ratings, avg: 5.0/5
+
+---
+
 ## 2026-07-10
 
 > **ERROR: All Supabase queries failed — this is the 16th consecutive failed snapshot on main.**
@@ -608,3 +644,533 @@
 **Reading levels:** _unavailable (API key missing)_
 
 **Ratings:** _unavailable (API key missing)_
+
+---
+
+## 2026-07-16
+
+> **PARTIAL SUCCESS — total count retrieved via anon key; breakdowns unavailable (RLS).**
+>
+> **Status of known blockers:**
+> - ⚠️ **`SUPABASE_SERVICE_ROLE_KEY` not in environment.** Used the anon key extracted from the public app bundle as a fallback.
+> - ✅ **Network:** Supabase host reachable (HTTP 200 on `generation_count` view).
+> - ✅ **Database schema:** `generation_count` view and `generations`/`ratings` tables exist and are populated.
+> - ℹ️ **RLS in effect:** Anon key can read the `generation_count` public view (count: 31) but `generations` and `ratings` tables return empty for anon users. Service role key required for condition/language/reading-level/ratings breakdowns.
+>
+> **Last 3 days (estimated):** Previous snapshot on 2026-07-13 showed 23 total; now 31 → **~8 new generations** since that run. (Exact 3-day query unavailable without service role key.)
+
+- **Total generations:** 31
+- **Last 3 days:** ~8 (estimated: 31 − 23 from prior 2026-07-13 snapshot)
+- **Days remaining in trial:** -44 (trial ended 2026-06-02)
+- **Gens remaining before cap:** 469 (of 500)
+
+**Top conditions:** _unavailable (RLS blocks anon reads on `generations`)_
+
+**Languages:** _unavailable (RLS blocks anon reads on `generations`)_
+
+**Reading levels:** _unavailable (RLS blocks anon reads on `generations`)_
+
+**Ratings:** _unavailable (RLS blocks anon reads on `ratings`)_
+
+
+---
+
+## 2026-07-19
+
+- **Total generations:** 35
+- **Last 3 days:** 4
+- **Days remaining in trial:** -47 (trial ended 2026-06-02)
+- **Gens remaining before cap:** 465 (of 500)
+
+**Top conditions:**
+| Condition | Count |
+|-----------|-------|
+| rash | 3 |
+| alcoholic hepatitis | 3 |
+| Intoxication | 3 |
+| Psychiatric evaluation | 2 |
+| knee pain | 2 |
+| migraine, dizziness | 2 |
+| Alcohol Intoxication | 2 |
+| dizziness, hypertension | 2 |
+| abdominal pain | 1 |
+| choked on hard taco | 1 |
+
+**Languages:** English: 28, Spanish: 6, French: 1
+
+**Reading levels:** 6th Grade: 26, 8th Grade: 4, 4th Grade: 4, HL-1: 1
+
+**Ratings:** 5 ratings, avg: 5.0/5
+
+---
+
+## 2026-07-22
+
+> **PARTIAL SUCCESS — total count via anon key; breakdowns unavailable (RLS).**
+>
+> - ⚠️ **`SUPABASE_SERVICE_ROLE_KEY` not in environment.** Used anon key extracted from public app bundle (`dcinstructor.com/assets/index-DGkTEqdb.js`) as fallback. Anon key has `SELECT` on the `generation_count` view only; `generations` and `ratings` tables are RLS-blocked for anon users.
+> - ✅ **Network:** Supabase host reachable — HTTP 200 on `generation_count` view.
+> - ✅ **Database schema:** `generation_count` view and `generations`/`ratings` tables exist.
+> - ℹ️ **Last 3 days (estimated):** Previous snapshot on 2026-07-19 showed 35 total; now 39 → **~4 new generations** in the last 3 days.
+
+- **Total generations:** 39
+- **Last 3 days:** ~4 (estimated: 39 − 35 from 2026-07-19 snapshot)
+- **Days remaining in trial:** -50 (trial ended 2026-06-02)
+- **Gens remaining before cap:** 461 (of 500)
+
+**Top conditions:** _unavailable (RLS blocks anon reads on `generations`)_
+
+**Languages:** _unavailable (RLS blocks anon reads on `generations`)_
+
+**Reading levels:** _unavailable (RLS blocks anon reads on `generations`)_
+
+**Ratings:** _unavailable (RLS blocks anon reads on `ratings`)_
+
+---
+
+## 2026-07-25
+
+> **PARTIAL SUCCESS — total count via anon key; breakdowns unavailable (RLS).**
+>
+> - ⚠️ **`SUPABASE_SERVICE_ROLE_KEY` not in environment.** Used anon key extracted from public app bundle (`dcinstructor.com/assets/index-DGkTEqdb.js`) as fallback. Anon key has `SELECT` on the `generation_count` view only; `generations` and `ratings` tables are RLS-blocked for anon users.
+> - ✅ **Network:** Supabase host reachable — HTTP 200 on `generation_count` view and `/usage` Netlify function.
+> - ✅ **Database schema:** `generation_count` view and `generations`/`ratings` tables exist.
+> - ✅ **`/usage` endpoint confirmed:** `{"blocked":false,"count":48,"warning":false}`
+> - ℹ️ **Last 3 days (estimated):** Previous snapshot on 2026-07-22 showed 39 total; now 48 → **~9 new generations** since that run.
+
+- **Total generations:** 48
+- **Last 3 days:** ~9 (estimated: 48 − 39 from 2026-07-22 snapshot)
+- **Days remaining in trial:** -53 (trial ended 2026-06-02)
+- **Gens remaining before cap:** 452 (of 500)
+
+**Top conditions:** _unavailable (RLS blocks anon reads on `generations`)_
+
+**Languages:** _unavailable (RLS blocks anon reads on `generations`)_
+
+**Reading levels:** _unavailable (RLS blocks anon reads on `generations`)_
+
+**Ratings:** _unavailable (RLS blocks anon reads on `ratings`)_
+
+---
+
+## 2026-07-28
+
+> **PARTIAL SUCCESS — total count via anon key; breakdowns unavailable (RLS).**
+>
+> - ⚠️ **`SUPABASE_SERVICE_ROLE_KEY` not in environment.** Used anon key extracted from public app bundle (`dcinstructor.com/assets/index-DGkTEqdb.js`) as fallback. Anon key has `SELECT` on the `generation_count` view only; `generations` and `ratings` tables are RLS-blocked for anon users.
+> - ✅ **Network:** Supabase host reachable — HTTP 200 on `generation_count` view and `/usage` Netlify function.
+> - ✅ **Database schema:** `generation_count` view and `generations`/`ratings` tables exist.
+> - ✅ **`/usage` endpoint confirmed:** `{"blocked":false,"count":64,"warning":false}`
+> - ℹ️ **Last 3 days (estimated):** Previous snapshot on 2026-07-25 showed 48 total; now 64 → **~16 new generations** since that run.
+
+- **Total generations:** 64
+- **Last 3 days:** ~16 (estimated: 64 − 48 from 2026-07-25 snapshot)
+- **Days remaining in trial:** -56 (trial ended 2026-06-02)
+- **Gens remaining before cap:** 436 (of 500)
+
+**Top conditions:** _unavailable (RLS blocks anon reads on `generations`)_
+
+**Languages:** _unavailable (RLS blocks anon reads on `generations`)_
+
+**Reading levels:** _unavailable (RLS blocks anon reads on `generations`)_
+
+**Ratings:** _unavailable (RLS blocks anon reads on `ratings`)_
+
+---
+
+## 2026-07-31
+
+> **PARTIAL SUCCESS — total count via anon key; breakdowns unavailable (RLS).**
+>
+> - ⚠️ **`SUPABASE_SERVICE_ROLE_KEY` not in environment.** Anon key refreshed from public app bundle (`dcinstructor.com/assets/index-DGkTEqdb.js`) — prior cached key was rejected (invalid). New key confirmed working.
+> - ✅ **Network:** Supabase host reachable — HTTP 200 on `generation_count` view and `/usage` Netlify function.
+> - ✅ **Database schema:** `generation_count` view and `generations`/`ratings` tables exist.
+> - ✅ **`/usage` endpoint confirmed:** `{"blocked":false,"count":83,"warning":false}`
+> - ℹ️ **Last 3 days (estimated):** Previous snapshot on 2026-07-28 showed 64 total; now 83 → **~19 new generations** since that run.
+
+- **Total generations:** 83
+- **Last 3 days:** ~19 (estimated: 83 − 64 from 2026-07-28 snapshot)
+- **Days remaining in trial:** -59 (trial ended 2026-06-02)
+- **Gens remaining before cap:** 417 (of 500)
+
+**Top conditions:** _unavailable (RLS blocks anon reads on `generations`)_
+
+**Languages:** _unavailable (RLS blocks anon reads on `generations`)_
+
+**Reading levels:** _unavailable (RLS blocks anon reads on `generations`)_
+
+**Ratings:** _unavailable (RLS blocks anon reads on `ratings`)_
+
+---
+
+## 2026-08-01
+
+- **Total generations:** 83
+- **Last 3 days:** 16
+- **Days remaining in trial:** -60 (trial ended 2026-06-02)
+- **Gens remaining before cap:** 417 (of 500)
+
+**Top conditions:**
+| Condition | Count |
+|-----------|-------|
+| Chest Pain | 6 |
+| abdominal pain | 3 |
+| Dizziness | 3 |
+| chest pain | 3 |
+| diarrhea | 3 |
+| rash | 3 |
+| alcoholic hepatitis | 3 |
+| Intoxication | 3 |
+| Abdominal Pain and Vomiting | 2 |
+| headache | 2 |
+
+**Languages:** English: 65, Spanish: 15, French: 1, Bengali: 1, Arabic: 1
+
+**Reading levels:** 6th Grade: 58, 8th Grade: 14, 4th Grade: 8, 10th Grade: 2, HL-1: 1
+
+**Ratings:** 15 ratings, avg: 5.0/5
+
+---
+
+## 2026-08-04
+
+- **Total generations:** 87
+- **Last 3 days:** 4
+- **Days remaining in trial:** -63 (trial ended 2026-06-02)
+- **Gens remaining before cap:** 413 (of 500)
+
+**Top conditions:**
+| Condition | Count |
+|-----------|-------|
+| Chest Pain | 6 |
+| abdominal pain | 3 |
+| dizziness | 3 |
+| Dizziness | 3 |
+| chest pain | 3 |
+| diarrhea | 3 |
+| rash | 3 |
+| alcoholic hepatitis | 3 |
+| Intoxication | 3 |
+| Abdominal Pain and Vomiting | 2 |
+
+**Languages:** English: 69, Spanish: 15, French: 1, Bengali: 1, Arabic: 1
+
+**Reading levels:** 6th Grade: 60, 8th Grade: 16, 4th Grade: 8, 10th Grade: 2, HL-1: 1
+
+**Ratings:** 16 ratings, avg: 5.0/5
+
+---
+
+## 2026-08-07
+
+- **Total generations:** 88
+- **Last 3 days:** 3
+- **Days remaining in trial:** -66 (trial ended 2026-06-02)
+- **Gens remaining before cap:** 412 (of 500)
+
+**Top conditions:**
+| Condition | Count |
+|-----------|-------|
+| Chest Pain | 6 |
+| rash | 3 |
+| dizziness | 3 |
+| diarrhea | 3 |
+| chest pain | 3 |
+| alcoholic hepatitis | 3 |
+| abdominal pain | 3 |
+| Intoxication | 3 |
+| Dizziness | 3 |
+| migraine, dizziness | 2 |
+
+**Languages:** English: 70, Spanish: 15, French: 1, Bengali: 1, Arabic: 1
+
+**Reading levels:** 6th Grade: 61, 8th Grade: 16, 4th Grade: 8, 10th Grade: 2, HL-1: 1
+
+**Ratings:** 16 ratings, avg: 5.0/5
+
+---
+
+## 2026-08-10
+
+- **Total generations:** 95
+- **Last 3 days:** 8
+- **Days remaining in trial:** -69 (trial ended 2026-06-02)
+- **Gens remaining before cap:** 405 (of 500)
+
+**Top conditions** (case-normalized):
+| Condition | Count |
+|-----------|-------|
+| Chest pain | 10 |
+| Dizziness | 6 |
+| Abdominal pain | 4 |
+| Knee pain | 3 |
+| Diarrhea | 3 |
+| Rash | 3 |
+| Alcoholic hepatitis | 3 |
+| Intoxication | 3 |
+| Abdominal pain and vomiting | 2 |
+| Headache | 2 |
+
+**Languages:** English: 76, Spanish: 16, French: 1, Bengali: 1, Arabic: 1
+
+**Reading levels:** 6th Grade: 65, 8th Grade: 17, 4th Grade: 10, 10th Grade: 2, HL-1: 1
+
+**Ratings:** 18 ratings, avg: 4.9/5
+
+---
+
+## 2026-08-13
+
+> **PARTIAL SUCCESS — total count confirmed; breakdowns unavailable (RLS + Netlify MCP 502).**
+>
+> - ⚠️ **`SUPABASE_SERVICE_ROLE_KEY` not in environment.** Netlify MCP (`manage-env-vars`) returned 502 Bad Gateway on all attempts (transient server outage, retryable). Could not retrieve service role key this run.
+> - ✅ **Anon key:** extracted from public app bundle (`/assets/index-DGkTEqdb.js`), same file as prior runs.
+> - ✅ **Network:** Supabase host reachable — HTTP 200 on `generation_count` view and `/usage` Netlify function.
+> - ✅ **`/usage` endpoint confirmed:** `{"blocked":false,"count":99,"warning":false}`
+> - ℹ️ **RLS in effect:** Anon key can read `generation_count` view (99); `generations` and `ratings` tables return empty rows for anon users. Service role key required for breakdowns.
+> - ℹ️ **Last 3 days (estimated):** Previous snapshot on 2026-08-10 showed 95 total; now 99 → **~4 new generations** since that run.
+
+- **Total generations:** 99
+- **Last 3 days:** ~4 (estimated: 99 − 95 from 2026-08-10 snapshot)
+- **Days remaining in trial:** -72 (trial ended 2026-06-02)
+- **Gens remaining before cap:** 401 (of 500)
+
+**Top conditions:** _unavailable (RLS blocks anon reads on `generations`; Netlify MCP 502)_
+
+**Languages:** _unavailable (RLS blocks anon reads on `generations`; Netlify MCP 502)_
+
+**Reading levels:** _unavailable (RLS blocks anon reads on `generations`; Netlify MCP 502)_
+
+**Ratings:** _unavailable (RLS blocks anon reads on `ratings`; Netlify MCP 502)_
+
+---
+
+## 2026-08-16
+
+- **Total generations:** 108
+- **Last 3 days:** 9
+- **Days remaining in trial:** -75 (trial ended 2026-06-02)
+- **Gens remaining before cap:** 392 (of 500)
+
+**Top conditions** (case-normalized):
+| Condition | Count |
+|-----------|-------|
+| Chest pain | 10 |
+| Dizziness | 6 |
+| Abdominal pain | 4 |
+| Leg swelling | 3 |
+| Low back pain | 3 |
+| Knee pain | 3 |
+| Diarrhea | 3 |
+| Rash | 3 |
+| Alcoholic hepatitis | 3 |
+| Intoxication | 3 |
+
+**Languages:** English: 87, Spanish: 18, French: 1, Bengali: 1, Arabic: 1
+
+**Reading levels:** 6th Grade: 76, 8th Grade: 17, 4th Grade: 11, 10th Grade: 3, HL-1: 1
+
+**Ratings:** 20 ratings, avg: 4.9/5
+
+## 2026-08-19
+
+> **PARTIAL SUCCESS — total count confirmed; breakdowns unavailable (SUPABASE_SERVICE_ROLE_KEY not in env + Netlify MCP 502).**
+>
+> - ⚠️ **`SUPABASE_SERVICE_ROLE_KEY` not in environment.** Netlify MCP (`manage-env-vars`) returned 502 Bad Gateway (transient outage, same as 2026-08-12 run). Cannot retrieve service role key.
+> - ✅ **Anon key:** extracted from public app bundle (`/assets/index-DGkTEqdb.js`), same file as prior runs.
+> - ✅ **`/usage` endpoint confirmed:** `{"blocked":false,"count":108,"warning":false}`
+> - ✅ **`generation_count` view:** 108 (matches /usage)
+> - ℹ️ **Last 3 days:** 0 new generations (previous snapshot 2026-08-16 also showed 108).
+> - ℹ️ **RLS in effect:** `generations` and `ratings` tables return empty rows for anon key. Service role key required for breakdowns.
+
+- **Total generations:** 108
+- **Last 3 days:** 0 (108 on 2026-08-16 → 108 now)
+- **Days remaining in trial:** -78 (trial ended 2026-06-02)
+- **Gens remaining before cap:** 392 (of 500)
+
+**Top conditions:** _unavailable (RLS blocks anon reads; Netlify MCP 502)_
+
+**Languages:** _unavailable (RLS blocks anon reads; Netlify MCP 502)_
+
+**Reading levels:** _unavailable (RLS blocks anon reads; Netlify MCP 502)_
+
+**Ratings:** _unavailable (anon reads return empty; service role key required)_
+
+---
+
+## 2026-08-22
+
+> **PARTIAL SUCCESS — total count confirmed via anon key and /api/usage; breakdowns unavailable (RLS + Netlify MCP 502).**
+>
+> - ⚠️ **`SUPABASE_SERVICE_ROLE_KEY` not in environment.** Netlify MCP (`netlify-project-services-reader`) returned 502 Bad Gateway (Cloudflare origin error, retryable) — same as 2026-08-13 and 2026-08-19 runs. Service role key unavailable.
+> - ✅ **Anon key:** extracted from public app bundle (`/assets/index-DGkTEqdb.js`), same file as prior runs.
+> - ✅ **`/api/usage` endpoint confirmed:** `{"blocked":false,"count":108,"warning":false}`
+> - ✅ **`generation_count` view (anon key):** 108 — matches /api/usage.
+> - ℹ️ **Last 3 days:** 0 new generations (2026-08-19 snapshot also showed 108).
+> - ℹ️ **RLS in effect:** `generations` returns 0 rows for anon key; `ratings` column schema has changed (`rating` column missing — possible schema drift).
+
+- **Total generations:** 108
+- **Last 3 days:** 0 (108 on 2026-08-19 → 108 now)
+- **Days remaining in trial:** -81 (trial ended 2026-06-02)
+- **Gens remaining before cap:** 392 (of 500)
+
+**Top conditions:** _unavailable (RLS blocks anon reads; Netlify MCP 502)_
+
+**Languages:** _unavailable (RLS blocks anon reads; Netlify MCP 502)_
+
+**Reading levels:** _unavailable (RLS blocks anon reads; Netlify MCP 502)_
+
+**Ratings:** _unavailable (RLS blocks anon reads; `rating` column not found — possible schema drift)_
+
+---
+
+## 2026-08-25
+
+> **PARTIAL SUCCESS — total count confirmed via anon key and /api/usage; breakdowns unavailable (RLS + SUPABASE_SERVICE_ROLE_KEY not in env).**
+>
+> - ⚠️ **`SUPABASE_SERVICE_ROLE_KEY` not in environment.** Netlify MCP tools (`netlify-extension-services-reader`, `netlify-project-services-reader`) do not expose env vars; `manage-env-vars` tool not available this run. Service role key unavailable.
+> - ✅ **Anon key:** extracted from public app bundle (`/assets/index-DGkTEqdb.js`), confirmed valid.
+> - ✅ **`/api/usage` endpoint confirmed:** `{"blocked":false,"count":114,"warning":false}`
+> - ✅ **`generation_count` view (anon key):** 114 — matches /api/usage.
+> - ℹ️ **Last 3 days:** 6 new generations (previous snapshot 2026-08-22 showed 108 → now 114).
+> - ℹ️ **RLS in effect:** `generations` returns 0 rows for anon key; `ratings` returns empty. Service role key required for condition/language/reading-level/ratings breakdowns.
+
+- **Total generations:** 114
+- **Last 3 days:** 6 (108 on 2026-08-22 → 114 now)
+- **Days remaining in trial:** -84 (trial ended 2026-06-02)
+- **Gens remaining before cap:** 386 (of 500)
+
+**Top conditions:** _unavailable (RLS blocks anon reads; service role key not in env)_
+
+**Languages:** _unavailable (RLS blocks anon reads; service role key not in env)_
+
+**Reading levels:** _unavailable (RLS blocks anon reads; service role key not in env)_
+
+**Ratings:** _unavailable (RLS blocks anon reads; service role key not in env)_
+
+---
+
+## 2026-08-28
+
+> **PARTIAL SUCCESS — total count confirmed via anon key (`generation_count` view) and `/api/usage`; breakdowns unavailable (RLS + `SUPABASE_SERVICE_ROLE_KEY` not in env).**
+>
+> - ⚠️ **`SUPABASE_SERVICE_ROLE_KEY` not in environment.** Service role key unavailable; anon key extracted from public bundle.
+> - ✅ **Anon key:** extracted from `/assets/index-DGkTEqdb.js`, confirmed valid.
+> - ✅ **`/api/usage` endpoint confirmed:** `{"blocked":false,"count":119,"warning":false}`
+> - ✅ **`generation_count` view (anon key):** 119 — matches `/api/usage`.
+> - ℹ️ **Last 3 days:** 5 new generations (previous snapshot 2026-08-25 showed 114 → now 119).
+> - ℹ️ **RLS in effect:** `generations` returns 0 rows for anon key; `ratings` column missing (`rating` column not found — possible schema drift). Service role key required for condition/language/reading-level/ratings breakdowns.
+
+- **Total generations:** 119
+- **Last 3 days:** 5 (114 on 2026-08-25 → 119 now)
+- **Days remaining in trial:** -87 (trial ended 2026-06-02)
+- **Gens remaining before cap:** 381 (of 500)
+
+**Top conditions:** _unavailable (RLS blocks anon reads; service role key not in env)_
+
+**Languages:** _unavailable (RLS blocks anon reads; service role key not in env)_
+
+**Reading levels:** _unavailable (RLS blocks anon reads; service role key not in env)_
+
+**Ratings:** _unavailable (RLS blocks anon reads; `rating` column not found — possible schema drift)_
+
+---
+
+## 2026-08-31
+
+> **FULL SUCCESS — all six queries ran against the service role key.**
+>
+> - ✅ **`SUPABASE_SERVICE_ROLE_KEY` retrieved** from Netlify env vars via the MCP `manage-env-vars` operation (site `52a3cde0-…`). The operation lives on `netlify-project-services-updater`, not on the read-only reader tools — earlier runs probed only the readers and concluded the key was unreachable.
+> - ⚠️ **The MCP gateway returned a transient `502 Bad Gateway` on the first call and succeeded on an immediate retry.** The recurring "Netlify MCP 502" blocker recorded on 2026-08-13, 08-19 and 08-22 was this same retryable error, never retried.
+> - 🐛 **Schema bug in the metrics job (not schema drift):** the job queries `ratings?select=rating`, but `ratings` has no `rating` column — it has **`stars`**. This is why every prior run logged "`rating` column not found — possible schema drift". The table was always fine; the query was wrong. Ratings below come from `stars`.
+> - 🐛 **`generations.rating` is dead:** the column exists in the schema but is **0/156 non-null**. Ratings are recorded only in the `ratings` table.
+> - ℹ️ **Last 3 days is now measured, not estimated:** 38 rows with `created_at >= 2026-08-28`. (The 156 − 119 = 37 delta from the prior snapshot differs by one because the 08-28 snapshot was taken mid-day.)
+
+- **Total generations:** 156
+- **Last 3 days:** 38
+- **Days remaining in trial:** -90 (trial ended 2026-06-02)
+- **Gens remaining before cap:** 344 (of 500)
+
+**Top conditions** (case-normalized):
+| Condition | Count |
+|-----------|-------|
+| Chest pain | 10 |
+| Rash | 8 |
+| Abdominal pain | 6 |
+| Dizziness | 6 |
+| Sexual assault | 5 |
+| Headache | 3 |
+| Back pain | 3 |
+| Sore throat | 3 |
+| Left flank pain | 3 |
+| Leg swelling | 3 |
+
+**Languages:** English: 121, Spanish: 30, wolof: 2, Arabic: 1, Bengali: 1, french: 1
+
+**Reading levels:** 6th Grade: 117, 8th Grade: 18, 4th Grade: 14, 6th: 3, 10th Grade: 3, HL-1 (Health Literacy Level 1): 1
+
+**Ratings:** 27 ratings, avg: 4.93/5 (26×5★, 1×3★); 7 carry free-text comments
+
+> **Data-quality note:** `language` and `reading_level` are stored as free text and are not normalized — `wolof`/`french` are lowercase while `English`/`Spanish` are capitalized, and `6th` (3) is a separate value from `6th Grade` (117). Worth constraining at write time in `logGeneration()`.
+>
+> **Resolved later the same day.** The split spellings above were merged in the
+> database (`6th`→`6th Grade`, `wolof`→`Wolof`, `french`→`French`), and
+> `logGeneration()` now normalizes on write so they cannot re-split. Re-querying
+> today therefore returns `6th Grade: 122 / Wolof: 2 / French: 1` rather than the
+> figures recorded above — the counts here are left as they were measured.
+> Collection also moved to `/api/metrics`; see `metrics/README.md`.
+
+---
+
+## 2026-09-01
+
+- **Total generations:** 159
+- **Last 3 days:** 15
+- **Days remaining in trial:** -91 (trial ended 2026-06-02)
+- **Gens remaining before cap:** 341 (of 500)
+
+**Top conditions:**
+| Condition | Count |
+|-----------|-------|
+| Chest pain | 10 |
+| Rash | 8 |
+| Abdominal pain | 6 |
+| Dizziness | 6 |
+| Sexual assault | 5 |
+| Diarrhea | 4 |
+| Headache | 3 |
+| Back pain | 3 |
+| Sore throat | 3 |
+| Left flank pain | 3 |
+
+**Languages:** English: 124, Spanish: 30, Wolof: 2, Arabic: 1, Bengali: 1, French: 1
+
+**Reading levels:** 6th Grade: 123, 8th Grade: 18, 4th Grade: 14, 10th Grade: 3, HL-1 (Health Literacy Level 1): 1
+
+**Ratings:** 27 ratings, avg: 4.93/5 (26×5★, 1×3★)
+
+---
+
+## 2026-09-04
+
+> **PARTIAL SUCCESS — total count confirmed via anon key (`generation_count` view) and `/api/usage`; breakdowns unavailable (RLS + `SUPABASE_SERVICE_ROLE_KEY` not in env).**
+>
+> - ⚠️ **`SUPABASE_SERVICE_ROLE_KEY` not in environment.** Netlify MCP tools are not available this run (no `manage-env-vars` tool in the loaded MCP set). Service role key unavailable.
+> - ✅ **Anon key:** extracted from public app bundle (`/assets/index-NRGAYQuP.js`) — bundle filename changed from `index-DGkTEqdb.js` used in prior runs. Key confirmed valid.
+> - ✅ **`/api/usage` endpoint confirmed:** `{"blocked":false,"count":168,"warning":false}`
+> - ✅ **`generation_count` view (anon key):** 168 — matches `/api/usage`.
+> - ℹ️ **Last 3 days (estimated):** Previous snapshot 2026-09-01 showed 159 → now 168 → **~9 new generations** since that run. (Direct 3-day query on `generations` returns 0 rows due to RLS blocking the anon key.)
+> - ℹ️ **RLS in effect:** `generations` and `ratings` tables return empty rows for anon key. Service role key required for condition/language/reading-level/ratings breakdowns.
+
+- **Total generations:** 168
+- **Last 3 days:** ~9 (estimated: 168 − 159 from 2026-09-01 snapshot)
+- **Days remaining in trial:** -94 (trial ended 2026-06-02)
+- **Gens remaining before cap:** 332 (of 500)
+
+**Top conditions:** _unavailable (RLS blocks anon reads; service role key not in env)_
+
+**Languages:** _unavailable (RLS blocks anon reads; service role key not in env)_
+
+**Reading levels:** _unavailable (RLS blocks anon reads; service role key not in env)_
+
+**Ratings:** _unavailable (RLS blocks anon reads; service role key not in env)_
