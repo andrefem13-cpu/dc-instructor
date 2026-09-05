@@ -103,8 +103,10 @@
   "version": 1,
   "review": {
     "status": "reviewed",
-    "reviewer": "Andre / EM clinician-owner",
-    "reviewer_role": "Emergency Medicine physician",
+    "reviewer": "Automated source review",
+    "reviewer_role": "Software pipeline; not a clinician signature",
+    "review_basis": "automated_source_check",
+    "clinical_approval_registry": "ops/review_approvals.json",
     "last_reviewed": "2026-07-04",
     "version": 1,
     "source_audit_status": "passed_for_v1",

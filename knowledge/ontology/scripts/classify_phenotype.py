@@ -951,7 +951,8 @@ EXCLUSION_RULES = {
 }
 
 NEGATIVE_CONTEXT = ["no ", "denies ", "without "]
-NEGATION_PATTERN = re.compile(r"(?:\bno|\bdenies|\bwithout)\s+$")
+# Keep this bounded bridge in parity with the Netlify runtime.
+NEGATION_PATTERN = re.compile(r"(?:\bno|\bdenies|\bwithout)\s+(?:retained\s+)?$")
 NEGATION_SUFFIX_PATTERN = re.compile(r"^\s*(?:absent|not present|negative)\b")
 DIAGNOSTIC_NEGATION_PREFIX = re.compile(
     r"(?:\bno|\bdenies|\bwithout|\bruled out|\bnot consistent with)\s+(?:\w+\s+){0,4}$"
@@ -1001,7 +1002,7 @@ def has_non_negated(text: str, term: str) -> bool:
         idx = text.find(term, start)
         if idx < 0:
             return False
-        window = text[max(0, idx - 16) : idx]
+        window = text[max(0, idx - 32) : idx]
         after = text[idx + len(term) : idx + len(term) + 32]
         if NEGATION_PATTERN.search(window) is None and NEGATION_SUFFIX_PATTERN.search(after) is None:
             return True

@@ -69,8 +69,8 @@ SUPPLEMENTAL_PACK_PATHS = [
     ROOT / "config" / "phase11501_11750_expansion_packs.json",
     ROOT / "config" / "phase11751_12000_expansion_packs.json",
 ]
-REVIEWER = "Andre / EM clinician-owner"
-REVIEWER_ROLE = "Emergency Medicine physician"
+REVIEWER = "Automated source review"
+REVIEWER_ROLE = "Software pipeline; not a clinician signature"
 REVIEW_DATE = "2026-06-01"
 REVIEWED_PACK_IDS = {
     "abscess_after_i_and_d",
@@ -3284,6 +3284,8 @@ def reviewed_block(notes: str, review_date: str = REVIEW_DATE) -> dict[str, Any]
         "status": "reviewed",
         "reviewer": REVIEWER,
         "reviewer_role": REVIEWER_ROLE,
+        "review_basis": "automated_source_check",
+        "clinical_approval_registry": "ops/review_approvals.json",
         "last_reviewed": review_date,
         "version": 1,
         "source_audit_status": "passed_for_v1",

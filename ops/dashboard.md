@@ -1,28 +1,30 @@
 # DC Instructor Ops Dashboard
 
-Generated: `2026-07-10T13:36:14.112436+00:00`
+Generated: `2026-09-05T21:42:20.945615+00:00`
 
 ## Current State
 
 - Canonical repo: [https://github.com/BloodSweatxED/dc-instructor](https://github.com/BloodSweatxED/dc-instructor)
-- Local repo: `/Users/andre/Desktop/Claude Projects/dc-instructor`
+- Local repo: `/workspace/scratch/e905309c5d2a/dc-instructor`
 - Branch: `codex/dc-knowledge-graph`
-- HEAD: `49a562f`
+- HEAD: `2147a48`
 - Origin: `https://github.com/BloodSweatxED/dc-instructor.git` (matches canonical repo)
-- Latest handoff: `/Users/andre/Desktop/Vaults/Life/11-DC instructor/handoffs/2026-07-10 DC Instructor Phase 12000 Consolidation Handoff.md`
+- Latest handoff: `not found`
 - Gate decision: `phenotype expansion allowed`
 - Expansion allowed: `True`
 - Active drafts: `0`
 - Reviewed source gaps: `0`
 - Draft source gaps: `0`
-- Dirty working tree entries: `1`
+- Dirty working tree entries: `378` (state file lists first 80)
 
-## Finish Line
+## Release Readiness
 
-- MVP: `312 / 100` reviewed phenotypes `100%`
-- MVP bar: `########################`
-- V1: `312 / 500` reviewed phenotypes `62.4%`
-- V1 bar: `###############---------`
+- [Coverage matrix and release gates](library_readiness.md)
+- [Clinical approval provenance](REVIEW_PROVENANCE.md)
+- Planning families with runtime-enabled entries: `83`
+- Identical English reading-level sets: `307`
+- Version-bound approval records: `0`
+- Entry counts and expansion gates do not establish clinical release approval.
 - Exported library: `312` conditions, `936` English files
 
 ## Review Queue
@@ -48,10 +50,10 @@ No open review queue items detected.
 ## Next Agent Startup
 
 1. Read this dashboard.
-2. Read the latest Obsidian handoff linked above.
+2. Read ops/library_readiness.md and ops/RELEASE_RECONCILIATION.md; consult the latest available handoff.
 3. Verify `git status --short --branch`, gate JSON, reviewed count, and review queue before editing.
-4. Run a 50-phase macrocycle unless gate state supports 100 phases or a smaller safety batch is required.
-5. At macrocycle end, rerun `npm run ops:dashboard` and write the dated Obsidian handoff.
+4. Work through the scoped release gates. Keep clinical approval separate from automated source checks.
+5. Run `npm run ops:dashboard` and `npm run check:release` after changes. Do not expand to a phase target by default.
 
 ## Progress Map
 

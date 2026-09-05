@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "purpose": "Explicit clinician approval of exact clinical content. Empty means no version-bound approvals recorded here, not that no historical review occurred.",
+  "approvals": []
+}

@@ -8,8 +8,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "netlify-dev": "netlify dev",
-    "validate:library": "knowledge/.venv/bin/python knowledge/ontology/scripts/validate_reviewed_library.py",
-    "ops:dashboard": "python3 ops/render_ops.py"
+    "validate:library": "python3 knowledge/ontology/scripts/validate_reviewed_library.py",
+    "ops:dashboard": "python3 ops/build_library_audit.py && python3 ops/render_ops.py",
+    "check:release": "python3 ops/check_release.py"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",

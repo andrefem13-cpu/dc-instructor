@@ -155,15 +155,15 @@ export default async (req) => {
       has_image_request: hasImage,
     });
     console.info(JSON.stringify({
-    event: 'generation_mode',
-    generation_id: generationId,
-    mode: ontology.mode,
-    phenotype_id: ontology.phenotype_id,
-    confidence: ontology.confidence,
-    fallback_reason: ontology.fallback_reason,
-    output_format: ontology.output_format || null,
-    output_modifiers: ontology.output_modifiers || [],
-    medication_provenance: medicationProvenance.mode,
+      event: 'generation_mode',
+      generation_id: generationId,
+      mode: ontology.mode,
+      phenotype_id: ontology.phenotype_id,
+      confidence: ontology.confidence,
+      fallback_reason: ontology.fallback_reason,
+      output_format: ontology.output_format || null,
+      output_modifiers: ontology.output_modifiers || [],
+      medication_provenance: medicationProvenance.mode,
     }));
     return generationId;
   };

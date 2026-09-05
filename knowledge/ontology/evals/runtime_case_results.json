@@ -32724,6 +32724,136 @@
     }
   },
   {
+    "case_id": "release_negation_no_retained",
+    "passed": true,
+    "result": {
+      "phenotype_id": "superficial_puncture_wound_no_retained_foreign_body_or_infection",
+      "confidence": 0.93,
+      "exclusions": [],
+      "missing_required_context": [],
+      "modifiers": [
+        "superficial puncture wound"
+      ],
+      "output_modifiers": [],
+      "fallback_reason": null
+    }
+  },
+  {
+    "case_id": "release_negation_without_retained",
+    "passed": true,
+    "result": {
+      "phenotype_id": "superficial_puncture_wound_no_retained_foreign_body_or_infection",
+      "confidence": 0.93,
+      "exclusions": [],
+      "missing_required_context": [],
+      "modifiers": [
+        "superficial puncture wound"
+      ],
+      "output_modifiers": [],
+      "fallback_reason": null
+    }
+  },
+  {
+    "case_id": "release_negation_denies_retained",
+    "passed": true,
+    "result": {
+      "phenotype_id": "superficial_puncture_wound_no_retained_foreign_body_or_infection",
+      "confidence": 0.93,
+      "exclusions": [],
+      "missing_required_context": [],
+      "modifiers": [
+        "superficial puncture wound"
+      ],
+      "output_modifiers": [],
+      "fallback_reason": null
+    }
+  },
+  {
+    "case_id": "release_negation_affirmed",
+    "passed": true,
+    "result": {
+      "phenotype_id": "superficial_puncture_wound_no_retained_foreign_body_or_infection",
+      "confidence": 0.78,
+      "exclusions": [
+        "retained_foreign_body"
+      ],
+      "missing_required_context": [],
+      "modifiers": [
+        "superficial puncture wound"
+      ],
+      "output_modifiers": [],
+      "fallback_reason": "unsafe_modifier_present"
+    }
+  },
+  {
+    "case_id": "release_negation_uncertain",
+    "passed": true,
+    "result": {
+      "phenotype_id": "superficial_puncture_wound_no_retained_foreign_body_or_infection",
+      "confidence": 0.78,
+      "exclusions": [
+        "retained_foreign_body"
+      ],
+      "missing_required_context": [],
+      "modifiers": [
+        "superficial puncture wound"
+      ],
+      "output_modifiers": [],
+      "fallback_reason": "unsafe_modifier_present"
+    }
+  },
+  {
+    "case_id": "release_negation_negation_other_clause",
+    "passed": true,
+    "result": {
+      "phenotype_id": "superficial_puncture_wound_no_retained_foreign_body_or_infection",
+      "confidence": 0.78,
+      "exclusions": [
+        "retained_foreign_body"
+      ],
+      "missing_required_context": [],
+      "modifiers": [
+        "superficial puncture wound"
+      ],
+      "output_modifiers": [],
+      "fallback_reason": "unsafe_modifier_present"
+    }
+  },
+  {
+    "case_id": "release_negation_later_affirmed",
+    "passed": true,
+    "result": {
+      "phenotype_id": "superficial_puncture_wound_no_retained_foreign_body_or_infection",
+      "confidence": 0.78,
+      "exclusions": [
+        "retained_foreign_body"
+      ],
+      "missing_required_context": [],
+      "modifiers": [
+        "superficial puncture wound"
+      ],
+      "output_modifiers": [],
+      "fallback_reason": "unsafe_modifier_present"
+    }
+  },
+  {
+    "case_id": "release_negation_no_long_distance_negation",
+    "passed": true,
+    "result": {
+      "phenotype_id": "superficial_puncture_wound_no_retained_foreign_body_or_infection",
+      "confidence": 0.78,
+      "exclusions": [
+        "retained_foreign_body"
+      ],
+      "missing_required_context": [],
+      "modifiers": [
+        "superficial puncture wound"
+      ],
+      "output_modifiers": [],
+      "fallback_reason": "unsafe_modifier_present"
+    }
+  },
+  {
     "case_id": "lumbar_clean_exact",
     "passed": true,
     "result": {
