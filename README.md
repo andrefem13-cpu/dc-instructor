@@ -22,6 +22,10 @@ cp .env.example .env
 npx netlify dev   # runs Vite + Functions together
 ```
 
+## Release completion
+
+Start with [the release completion plan](ops/RELEASE_COMPLETION.md) for the proposed pilot scope, dated gates, current verification, and recovery blockers. The older generated dashboard measures inventory, not release readiness.
+
 ## Ops dashboard
 
 The repo includes a generated continuity dashboard for long-running DC Instructor work:
