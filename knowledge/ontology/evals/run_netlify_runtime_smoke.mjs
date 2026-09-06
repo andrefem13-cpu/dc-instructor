@@ -768,6 +768,8 @@ const cases = JSON.parse(
       item.id.startsWith('phase776')
   );
 
+cases.push(...JSON.parse(readFileSync(join('knowledge', 'ontology', 'evals', 'release_negation_runtime_cases.json'), 'utf8')));
+
 for (const item of cases) {
   const result = classifyOntology({ condition: item.condition, edNoteScrubbed: item.ed_note });
   if (result.phenotype_id !== item.expected_phenotype_id || result.fallback_reason !== item.expected_fallback_reason) {

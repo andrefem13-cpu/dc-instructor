@@ -6,7 +6,7 @@ Clinical status: reviewed_for_limited_cerumen_impaction_without_infection_or_for
 
 Production status: enabled with runtime modifier gates.
 
-Reviewer: Andre / EM clinician-owner.
+Reviewer: Automated source review.
 
 Review date: 2026-06-10.
 

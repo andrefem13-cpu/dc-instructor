@@ -6,7 +6,7 @@ Clinical status: reviewed_for_limited_acute_sinusitis_supportive_care_without_an
 
 Production status: enabled with runtime modifier gates.
 
-Reviewer: Andre / EM clinician-owner.
+Reviewer: Automated source review.
 
 Review date: 2026-06-01.
 

@@ -6,7 +6,7 @@ Clinical status: reviewed_for_limited_adult_foot_sprain_or_strain_with_negative_
 
 Production status: enabled with runtime modifier gates.
 
-Reviewer: Andre / EM clinician-owner.
+Reviewer: Automated source review.
 
 Review date: 2026-06-05.
 

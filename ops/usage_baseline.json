@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "source": "metrics/snapshots.md",
+  "snapshot_date": "2026-09-01",
+  "total_generations": 159,
+  "english_requests": 124,
+  "spanish_requests": 30,
+  "latest_count_snapshot_date": "2026-09-04",
+  "latest_count": 168,
+  "scope": "The complete snapshot publishes only ten top conditions. These counts are not the complete encounter distribution and cannot establish a library coverage rate.",
+  "conditions": [
+    {"condition": "Chest pain", "count": 10, "priority": "P1", "related_ids": ["chest_pain_low_risk_negative_ed_workup", "costochondritis_uncomplicated_no_cardiopulmonary_red_flags"], "coverage": "Broad chest-pain route retired; separate diagnosed chest-wall pathways exist", "next_action": "Design clinician-confirmed post-evaluation instructions without implying automated risk stratification"},
+    {"condition": "Rash", "count": 8, "priority": "P1", "related_family": "Contact and irritant dermatitis", "coverage": "Many diagnosis-specific routes; undifferentiated rash is not equivalent", "next_action": "Consolidate maintenance around core care families and adapt English levels before Spanish"},
+    {"condition": "Abdominal pain", "count": 6, "priority": "P1", "related_ids": ["abdominal_pain_nonspecific_reassuring_workup"], "coverage": "Limited to documented clinician-directed recheck", "next_action": "Review whether the recheck scope meets actual use and collect explicit evaluation and follow-up context"},
+    {"condition": "Dizziness", "count": 6, "priority": "P1", "related_ids": [], "coverage": "No dedicated reviewed route", "next_action": "Define diagnosis-specific scope and needed evidence before authoring"},
+    {"condition": "Sexual assault", "count": 5, "priority": "P1", "related_ids": [], "coverage": "No dedicated reviewed route", "next_action": "Create a specialist and local-workflow review brief; do not reuse a generic static discharge pathway"},
+    {"condition": "Diarrhea", "count": 4, "priority": "P2", "related_family": "Gastroenteritis and acute diarrhea", "coverage": "Limited stable-adult pathways exist", "next_action": "Test ordinary clinician wording, improve English adaptations, then prepare Spanish review"},
+    {"condition": "Headache", "count": 3, "priority": "P1", "related_ids": ["migraine_improved_discharge", "tension_headache_reassuring_exam_no_red_flags"], "coverage": "Migraine retired; narrow tension-headache route exists", "next_action": "Separate diagnosed headache instructions from assessment of undifferentiated headache"},
+    {"condition": "Back pain", "count": 3, "priority": "P2", "related_ids": ["lumbar_strain_no_red_flags"], "coverage": "Limited mechanical low-back-pain route exists", "next_action": "Validate real wording and preserve clinician-specific activity and medication plans"},
+    {"condition": "Sore throat", "count": 3, "priority": "P2", "related_ids": ["viral_pharyngitis_strep_negative"], "coverage": "Limited strep-negative viral pathway exists", "next_action": "Confirm diagnosis and testing context; adapt English and Spanish output"},
+    {"condition": "Left flank pain", "count": 3, "priority": "P1", "related_ids": ["renal_colic_stable_no_infection"], "coverage": "Stable renal-colic route only; flank pain alone is not a diagnosis", "next_action": "Validate diagnosed stone context and explicitly retain fallback for other causes"}
+  ]
+}

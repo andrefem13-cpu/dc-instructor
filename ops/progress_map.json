@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-10T13:36:14.112436+00:00",
+  "generated_at": "2026-09-05T21:42:20.945615+00:00",
   "project": "DC Instructor",
   "canonical_repo_url": "https://github.com/BloodSweatxED/dc-instructor",
   "summary": {
@@ -7,10 +7,18 @@
     "reviewed_count": 312,
     "library_file_count": 936,
     "library_condition_count": 312,
-    "mvp_target": 100,
-    "mvp_percent": 100,
-    "v1_target": 500,
-    "v1_percent": 62.4,
+    "coverage_audit": {
+      "manifest_phenotypes": 318,
+      "runtime_enabled": 312,
+      "retired": 6,
+      "planning_families": 86,
+      "enabled_planning_families": 83,
+      "english_files": 936,
+      "identical_english_level_sets": 307,
+      "spanish_files": 0,
+      "version_bound_approvals": 0,
+      "historical_approval_narratives": 7
+    },
     "status_counts": {
       "reviewed_exported": 312,
       "not_started": 6

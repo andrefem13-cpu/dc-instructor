@@ -6,7 +6,7 @@ Clinical status: reviewed_for_limited_adult_acute_traumatic_elbow_sprain_or_stra
 
 Production status: enabled with runtime modifier gates.
 
-Reviewer: Andre / EM clinician-owner.
+Reviewer: Automated source review.
 
 Review date: 2026-06-05.
 

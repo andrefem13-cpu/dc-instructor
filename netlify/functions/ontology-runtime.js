@@ -14,7 +14,8 @@ const SECTION_ORDER = [
 
 const NEGATIVE_CONTEXT = ['no ', 'denies ', 'without '];
 const SUPPORTED_ONTOLOGY_LANGUAGE = 'english';
-const NEGATION_PATTERN = /(?:\bno|\bdenies|\bwithout)\s+$/;
+// Only bridge the known adjective "retained"; do not negate across arbitrary words or clauses.
+const NEGATION_PATTERN = /(?:\bno|\bdenies|\bwithout)\s+(?:retained\s+)?$/;
 const NEGATION_SUFFIX_PATTERN = /^\s*(?:absent|not present|negative)\b/;
 const DIAGNOSTIC_NEGATION_PREFIX =
   /(?:\bno|\bdenies|\bwithout|\bruled out|\bnot consistent with)\s+(?:\w+\s+){0,4}$/;
@@ -830,7 +831,9 @@ const EXCLUSION_RULES = {
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(here, '..', '..');
-const ontologyRoot = join(repoRoot, 'knowledge', 'ontology');
+// Bundling can move this module. Included data retains its project-relative path.
+const ontologyRoots = [join(repoRoot, 'knowledge', 'ontology'), join(process.cwd(), 'knowledge', 'ontology')];
+const ontologyRoot = ontologyRoots.find(root => existsSync(join(root, 'runtime', 'ontology_manifest.json'))) || ontologyRoots[0];
 const manifestPath = join(ontologyRoot, 'runtime', 'ontology_manifest.json');
 
 function readJSON(path) {
@@ -846,7 +849,7 @@ function hasNonNegated(text, term) {
   while (true) {
     const idx = text.indexOf(term, start);
     if (idx < 0) return false;
-    const window = text.slice(Math.max(0, idx - 16), idx);
+    const window = text.slice(Math.max(0, idx - 32), idx);
     const after = text.slice(idx + term.length, idx + term.length + 32);
     if (!NEGATION_PATTERN.test(window) && !NEGATION_SUFFIX_PATTERN.test(after)) return true;
     start = idx + term.length;
@@ -931,7 +934,7 @@ function matchSpecificity(matched = []) {
 }
 
 function loadManifest() {
-  if (!existsSync(manifestPath)) return { phenotypes: [] };
+  if (!existsSync(manifestPath)) return null;
   return readJSON(manifestPath);
 }
 
@@ -1046,6 +1049,13 @@ export function sourceCardsForPhenotype(phenotypeId) {
 
 export function classifyOntology({ condition, edNoteScrubbed = '' }) {
   const manifest = loadManifest();
+  if (!manifest) {
+    return {
+      mode: 'generator', phenotype_id: null, confidence: 0,
+      exclusions: [], missing_required_context: [], modifiers: [], output_modifiers: [],
+      fallback_reason: 'ontology_assets_unavailable',
+    };
+  }
   const text = normalize(`${condition} ${edNoteScrubbed}`);
   const scored = [];
   for (const phenotype of manifest.phenotypes || []) {

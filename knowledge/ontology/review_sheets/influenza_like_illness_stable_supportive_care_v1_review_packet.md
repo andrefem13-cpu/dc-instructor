@@ -6,7 +6,7 @@ Clinical status: reviewed_for_limited_stable_adult_influenza_like_illness_suppor
 
 Production status: enabled with runtime modifier gates.
 
-Reviewer: Andre / EM clinician-owner.
+Reviewer: Automated source review.
 
 Review date: 2026-06-10.
 

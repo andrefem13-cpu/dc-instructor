@@ -15,11 +15,19 @@ Run:
 npm run ops:dashboard
 ```
 
-At the end of each macrocycle:
+The release audit replaces phase-count completion targets:
 
-1. Write the dated Obsidian handoff.
+- `library_readiness.md`: usage-driven coverage matrix and release gates.
+- `coverage_map.json`: explicit planning-family mapping for every phenotype.
+- `library_audit.json`: reproducible inventory, reading-level comparison and content hashes.
+- `REVIEW_PROVENANCE.md`: separation of automated review and explicit clinician approval.
+- `RELEASE_RECONCILIATION.md`: changes, verification and remaining release work.
+
+At the end of release work:
+
+1. Update the repository release notes and available handoff.
 2. Run `npm run ops:dashboard`.
-3. Commit the updated `ops/` artifacts with the macrocycle work.
+3. Run `npm run check:release` and commit updated artifacts with the work.
 
 The canonical GitHub repo is:
 

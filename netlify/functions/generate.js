@@ -147,16 +147,13 @@ export default async (req) => {
   const tailoringMode = ontology.mode === 'ontology'
     ? 'reviewed_ontology_static'
     : 'llm_tailored_with_policy';
-
-
-  if (ontology.mode === 'ontology' && ontology.output) {
+  const recordGeneration = async () => {
     const generationId = await logGeneration({
       reading_level: readingLevel,
       language,
       condition_input: condition,
       has_image_request: hasImage,
     });
-
     console.info(JSON.stringify({
       event: 'generation_mode',
       generation_id: generationId,
@@ -168,7 +165,11 @@ export default async (req) => {
       output_modifiers: ontology.output_modifiers || [],
       medication_provenance: medicationProvenance.mode,
     }));
+    return generationId;
+  };
 
+  if (ontology.mode === 'ontology' && ontology.output) {
+    const generationId = await recordGeneration();
     const stream = new ReadableStream({
       start(controller) {
         const enc = new TextEncoder();
@@ -221,24 +222,7 @@ export default async (req) => {
 
   // Log only after the upstream request is accepted, so failed generations
   // don't inflate the usage data.
-  const generationId = await logGeneration({
-    reading_level: readingLevel,
-    language,
-    condition_input: condition,
-    has_image_request: hasImage,
-  });
-
-  console.info(JSON.stringify({
-    event: 'generation_mode',
-    generation_id: generationId,
-    mode: ontology.mode,
-    phenotype_id: ontology.phenotype_id,
-    confidence: ontology.confidence,
-    fallback_reason: ontology.fallback_reason,
-    output_format: ontology.output_format || null,
-    output_modifiers: ontology.output_modifiers || [],
-    medication_provenance: medicationProvenance.mode,
-  }));
+  const generationId = await recordGeneration();
 
   const stream = new ReadableStream({
     async start(controller) {

@@ -212,8 +212,7 @@ def build_state() -> dict[str, Any]:
     ) if LIBRARY_DIR.exists() else []
 
     reviewed_count = gate.get("phase20_coverage", {}).get("reviewed_count") or status_counts["reviewed_exported"]
-    mvp_target = 100
-    v1_target = 500
+    audit = load_json(OPS_DIR / "library_audit.json", {}).get("summary", {})
     review_queue = parse_review_queue()
 
     return {
@@ -238,14 +237,11 @@ def build_state() -> dict[str, Any]:
             "reviewed_count": reviewed_count,
             "library_file_count": len(library_conditions) * len(READING_LEVEL_FILES),
             "library_condition_count": len(library_conditions),
-            "mvp_target": mvp_target,
-            "mvp_percent": round(min(reviewed_count / mvp_target, 1) * 100, 1),
-            "v1_target": v1_target,
-            "v1_percent": round(min(reviewed_count / v1_target, 1) * 100, 1),
+            "coverage_audit": audit,
             "status_counts": dict(status_counts),
             "domain_counts": {domain: dict(counts) for domain, counts in sorted(domain_counts.items())},
         },
-        "next_action": "Run the next 50-phase autonomous expansion macrocycle from the latest handoff; keep review-needed items queued.",
+        "next_action": "Read ops/library_readiness.md and satisfy scoped release gates. Do not resume phase-count expansion by default.",
         "nodes": sorted(nodes, key=lambda item: (item["domain"], item["label"])),
     }
 
@@ -284,12 +280,14 @@ def render_dashboard(state: dict[str, Any]) -> str:
         f"- Draft source gaps: `{gate.get('draft_source_gap_count', 'unknown')}`",
         f"- Dirty working tree entries: `{repo['dirty_file_count']}`{dirty_suffix}",
         "",
-        "## Finish Line",
+        "## Release Readiness",
         "",
-        f"- MVP: `{progress['reviewed_count']} / {progress['mvp_target']}` reviewed phenotypes `{progress['mvp_percent']}%`",
-        f"- MVP bar: `{bar(progress['mvp_percent'])}`",
-        f"- V1: `{progress['reviewed_count']} / {progress['v1_target']}` reviewed phenotypes `{progress['v1_percent']}%`",
-        f"- V1 bar: `{bar(progress['v1_percent'])}`",
+        "- [Coverage matrix and release gates](library_readiness.md)",
+        "- [Clinical approval provenance](REVIEW_PROVENANCE.md)",
+        f"- Planning families with runtime-enabled entries: `{progress['coverage_audit'].get('enabled_planning_families', 'unknown')}`",
+        f"- Identical English reading-level sets: `{progress['coverage_audit'].get('identical_english_level_sets', 'unknown')}`",
+        f"- Version-bound approval records: `{progress['coverage_audit'].get('version_bound_approvals', 'unknown')}`",
+        "- Entry counts and expansion gates do not establish clinical release approval.",
         f"- Exported library: `{progress['library_condition_count']}` conditions, `{progress['library_file_count']}` English files",
         "",
         "## Review Queue",
@@ -334,10 +332,10 @@ def render_dashboard(state: dict[str, Any]) -> str:
         "## Next Agent Startup",
         "",
         "1. Read this dashboard.",
-        "2. Read the latest Obsidian handoff linked above.",
+        "2. Read ops/library_readiness.md and ops/RELEASE_RECONCILIATION.md; consult the latest available handoff.",
         "3. Verify `git status --short --branch`, gate JSON, reviewed count, and review queue before editing.",
-        "4. Run a 50-phase macrocycle unless gate state supports 100 phases or a smaller safety batch is required.",
-        "5. At macrocycle end, rerun `npm run ops:dashboard` and write the dated Obsidian handoff.",
+        "4. Work through the scoped release gates. Keep clinical approval separate from automated source checks.",
+        "5. Run `npm run ops:dashboard` and `npm run check:release` after changes. Do not expand to a phase target by default.",
         "",
         "## Progress Map",
         "",
@@ -549,8 +547,8 @@ def render_html(progress: dict[str, Any]) -> str:
   <script>
     const data = JSON.parse(document.getElementById('progress-data').textContent);
     const labels = {{
-      reviewed_exported: 'Reviewed + exported',
-      reviewed_missing_export: 'Reviewed, missing export',
+      reviewed_exported: 'Runtime enabled + exported',
+      reviewed_missing_export: 'Runtime enabled, missing export',
       draft: 'Draft',
       review_needed: 'Andre review needed',
       blocked: 'Blocked',
@@ -559,10 +557,10 @@ def render_html(progress: dict[str, Any]) -> str:
     document.getElementById('generated').textContent = data.generated_at;
     const summary = data.summary;
     document.getElementById('summary').innerHTML = `
-      <div class="metric"><strong>${{summary.reviewed_count}}</strong><span>reviewed phenotypes</span></div>
+      <div class="metric"><strong>${{summary.reviewed_count}}</strong><span>runtime-enabled variants</span></div>
       <div class="metric"><strong>${{summary.library_condition_count}}</strong><span>exported library conditions</span></div>
-      <div class="metric"><strong>${{summary.mvp_percent}}%</strong><span>MVP target ${{summary.reviewed_count}} / ${{summary.mvp_target}}</span><div class="bar"><i style="width:${{summary.mvp_percent}}%"></i></div></div>
-      <div class="metric"><strong>${{summary.v1_percent}}%</strong><span>V1 target ${{summary.reviewed_count}} / ${{summary.v1_target}}</span><div class="bar"><i style="width:${{summary.v1_percent}}%"></i></div></div>
+      <div class="metric"><strong>${{summary.coverage_audit.enabled_planning_families ?? '?'}}</strong><span>planning families with enabled content</span></div>
+      <div class="metric"><strong>${{summary.coverage_audit.identical_english_level_sets ?? '?'}}</strong><span>identical English level sets; adaptation review needed</span></div>
     `;
     document.getElementById('legend').innerHTML = Object.entries(data.legend)
       .map(([key, color]) => `<span><i class="swatch" style="background:${{color}}"></i>${{labels[key] || key}}</span>`)

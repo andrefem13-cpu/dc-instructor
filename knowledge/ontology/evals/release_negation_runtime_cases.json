@@ -1,0 +1,73 @@
+[
+  {
+    "id": "release_negation_no_retained",
+    "condition": "superficial puncture wound",
+    "ed_note": "Adult. Clinician diagnosis superficial puncture wound. No infection. No tendon injury. Neurovascularly intact. No retained foreign body.",
+    "expected_phenotype_id": "superficial_puncture_wound_no_retained_foreign_body_or_infection",
+    "expected_fallback_reason": null
+  },
+  {
+    "id": "release_negation_without_retained",
+    "condition": "superficial puncture wound",
+    "ed_note": "Adult. Clinician diagnosis superficial puncture wound. No infection. No tendon injury. Neurovascularly intact. Wound without retained foreign body.",
+    "expected_phenotype_id": "superficial_puncture_wound_no_retained_foreign_body_or_infection",
+    "expected_fallback_reason": null
+  },
+  {
+    "id": "release_negation_denies_retained",
+    "condition": "superficial puncture wound",
+    "ed_note": "Adult. Clinician diagnosis superficial puncture wound. No infection. No tendon injury. Neurovascularly intact. Denies retained foreign body.",
+    "expected_phenotype_id": "superficial_puncture_wound_no_retained_foreign_body_or_infection",
+    "expected_fallback_reason": null
+  },
+  {
+    "id": "release_negation_affirmed",
+    "condition": "superficial puncture wound",
+    "ed_note": "Adult. Clinician diagnosis superficial puncture wound. No infection. No tendon injury. Neurovascularly intact. Retained foreign body present.",
+    "expected_phenotype_id": "superficial_puncture_wound_no_retained_foreign_body_or_infection",
+    "expected_fallback_reason": "unsafe_modifier_present",
+    "expected_exclusions": [
+      "retained_foreign_body"
+    ]
+  },
+  {
+    "id": "release_negation_uncertain",
+    "condition": "superficial puncture wound",
+    "ed_note": "Adult. Clinician diagnosis superficial puncture wound. No infection. No tendon injury. Neurovascularly intact. Cannot exclude retained foreign body.",
+    "expected_phenotype_id": "superficial_puncture_wound_no_retained_foreign_body_or_infection",
+    "expected_fallback_reason": "unsafe_modifier_present",
+    "expected_exclusions": [
+      "retained_foreign_body"
+    ]
+  },
+  {
+    "id": "release_negation_negation_other_clause",
+    "condition": "superficial puncture wound",
+    "ed_note": "Adult. Clinician diagnosis superficial puncture wound. No infection. No tendon injury. Neurovascularly intact. No tendon injury. Retained foreign body present.",
+    "expected_phenotype_id": "superficial_puncture_wound_no_retained_foreign_body_or_infection",
+    "expected_fallback_reason": "unsafe_modifier_present",
+    "expected_exclusions": [
+      "retained_foreign_body"
+    ]
+  },
+  {
+    "id": "release_negation_later_affirmed",
+    "condition": "superficial puncture wound",
+    "ed_note": "Adult. Clinician diagnosis superficial puncture wound. No infection. No tendon injury. Neurovascularly intact. No retained foreign body initially, but foreign body now present.",
+    "expected_phenotype_id": "superficial_puncture_wound_no_retained_foreign_body_or_infection",
+    "expected_fallback_reason": "unsafe_modifier_present",
+    "expected_exclusions": [
+      "retained_foreign_body"
+    ]
+  },
+  {
+    "id": "release_negation_no_long_distance_negation",
+    "condition": "superficial puncture wound",
+    "ed_note": "Adult. Clinician diagnosis superficial puncture wound. No infection. No tendon injury. Neurovascularly intact. No infection but retained foreign body present.",
+    "expected_phenotype_id": "superficial_puncture_wound_no_retained_foreign_body_or_infection",
+    "expected_fallback_reason": "unsafe_modifier_present",
+    "expected_exclusions": [
+      "retained_foreign_body"
+    ]
+  }
+]

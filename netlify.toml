@@ -6,6 +6,9 @@
 [functions]
   node_bundler = "esbuild"
 
+[functions.generate]
+  included_files = ["knowledge/ontology/runtime/*.json", "knowledge/ontology/phenotypes/*.json", "knowledge/ontology/primitives/*.json"]
+
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"

@@ -9,8 +9,8 @@ from ontology_lib import ROOT, assemble_discharge, load_primitives, read_json
 from build_expanded_draft_packs import MANIFEST_PATH, build_runtime_manifest
 
 
-REVIEWER = "Andre / EM clinician-owner"
-REVIEWER_ROLE = "Emergency Medicine physician"
+REVIEWER = "Automated source review"
+REVIEWER_ROLE = "Software pipeline; not a clinician signature"
 REVIEW_DATE = "2026-06-01"
 REVIEW_DIR = ROOT / "review_sheets"
 
@@ -1423,6 +1423,8 @@ def reviewed_block(notes: str, extra: dict[str, Any] | None = None) -> dict[str,
         "status": "reviewed",
         "reviewer": REVIEWER,
         "reviewer_role": REVIEWER_ROLE,
+        "review_basis": "automated_source_check",
+        "clinical_approval_registry": "ops/review_approvals.json",
         "last_reviewed": REVIEW_DATE,
         "version": 1,
         "source_audit_status": "passed_for_v1",

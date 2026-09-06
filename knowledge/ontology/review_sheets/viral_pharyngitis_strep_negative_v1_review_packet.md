@@ -6,7 +6,7 @@ Clinical status: reviewed_for_limited_strep_negative_viral_pharyngitis_use.
 
 Production status: enabled with runtime modifier gates.
 
-Reviewer: Andre / EM clinician-owner.
+Reviewer: Automated source review.
 
 Review date: 2026-06-01.
 
