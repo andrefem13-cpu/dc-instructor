@@ -22,7 +22,7 @@ These candidates connect existing pathways to the usage gaps in the supplied rep
 
 | Target | Work | Owner | Evidence needed |
 |---|---|---|---|
-| September 7 | Recover the September 5 ZIP; compare its commits against current main and the reconciliation branch. Resolve dependency findings. | Engineering | Reviewed diff, passing runtime/handler/export/build/bundling checks; no missing recovery work |
+| September 7 | Recovery and reconciliation complete. Resolve dependency findings and validate the deployment preview. | Engineering | Recovery history preserved; full local release checks pass. Dependency and preview checks remain. |
 | September 8 | Confirm the five exact pathways, output settings, exclusions, and intended pilot users. | André | Explicit scope decision recorded in the repository |
 | September 11 | Adapt English 4th-grade, 6th-grade, and HL-1 content for selected pathways. | Engineering drafts; André reviews | Meaning, medication instructions, return precautions, and follow-up checked across levels; automated scores used only as screening |
 | September 14 | Prepare Spanish versions and complete bilingual clinical review. | Engineering drafts; qualified bilingual clinician reviews | Semantic equivalence and format checks, reviewer attribution, approvals tied to actual content hashes |
@@ -34,19 +34,19 @@ No recurring work has been scheduled. Dates are milestones, not unattended execu
 
 ## Verified September 5
 
-GitHub read access and repository permissions are available on this Mac. The original PR #1 still points to `73bb84f` and has a merge conflict with main `b59f0c6`. An isolated branch, `codex/release-completion-2026-09-05`, reconciles those histories at `ff124bc`.
+The extracted recovery package was supplied and its Git bundle verified. Recovered head `f4612da` contains three commits based on main `b59f0c6` and library branch `73bb84f`. All three are preserved in the history of `codex/release-completion-2026-09-05`, alongside the earlier reconciliation and completion plan.
 
-The conflict concerned usage logging. The repaired handler logs static output once and logs generator requests only after upstream acceptance. Four mocked handler scenarios check static output, upstream acceptance, upstream rejection, and network failure. These tests make no external requests. Midstream completion accounting remains outside this change.
+The recovered handler factors logging into a shared helper while retaining accepted-upstream semantics. Both handler suites are retained: seven recovery cases cover English levels, Spanish and unsupported-format fallbacks, unsupported conditions, and upstream rejection; four additional cases check call order and network failure. All use mocked services.
 
-Fresh checks passed: 1,671 Python runtime cases, the Netlify runtime smoke suite, ontology validation, export validation of 936 files across 312 conditions, product tailoring and medication prompt checks, and the production build. Patient-facing library files were unchanged by this reconciliation.
+Fresh `npm run check:release` verification passed after reconciliation: 1,679 Python runtime cases, Netlify smoke cases, all 11 handler cases, isolated bundling with 326 declared assets, explicit missing-manifest fallback, ontology and 936-file export validation, existing boundary and prompt checks, approval integrity tests, reproducible audit checks, and the production build. All 936 patient-facing library files remain unchanged. Approval tracking is present, with zero current version-bound approvals.
 
-The supplied report describes 1,679 cases and additional approval/audit/bundling work in a recovery ZIP. That ZIP was not found in the inspected local locations. Its commits and additional checks have not been recovered or independently verified. Do not mark those tasks complete from the report alone.
+The recovered work also replaces inventory-based completion percentages in the ops dashboard with release gates and removes automatically attributed clinician signatures from generated review metadata. Historical review narratives remain preserved. This is provenance correction, not new clinical approval.
 
 Dependency inspection reports one high-severity production dependency finding in `ws`. The complete dependency tree reports eight findings. Triage and repair are an engineering release gate; no automatic breaking upgrades were applied.
 
 ## Remaining blockers
 
-1. Locate `DC-Instructor-Release-Recovery-2026-09-05.zip`. Import or reconcile it before duplicating its audit and approval tooling.
+1. Recovery is complete. Resolve dependency findings before release; the full local suite is passing.
 2. Obtain scope confirmation and attributable content approval. The legacy `reviewed` flag is not proof of current clinician sign-off. The supplied report lists zero version-bound approvals.
 3. Complete literacy adaptation and Spanish review. The report lists 307 identical English level sets and zero Spanish library files.
 4. Validate preview behavior and telemetry. Passing local tests does not establish deployment or clinical readiness.
@@ -54,6 +54,6 @@ Dependency inspection reports one high-severity production dependency finding in
 
 ## Next session handoff
 
-Continue in the isolated checkout under this task's `work/dc-instructor` directory. Confirm the branch and clean working state. Recover the missing package first, compare its history to `ff124bc`, and preserve its tested work. Use one writer per branch.
+Continue in the isolated checkout under this task's `work/dc-instructor` directory. Confirm the branch and clean working state. Recovery is complete; do not reimport or recreate its tooling. Next: dependency triage, scope confirmation, and a review packet for the proposed five pathways. Use one writer per branch.
 
-This plan is the proposed release planning entry point. The existing generated ops dashboard is historical and still reports phenotype-count progress. Replace its completion model with the recovered readiness/approval audit before using it to judge release status.
+This plan is the proposed release planning entry point. The recovered `ops/library_readiness.md`, `ops/library_audit.json`, and `ops/REVIEW_PROVENANCE.md` supply the detailed coverage and approval evidence. The dashboard now separates inventory from readiness. Refresh generated ops artifacts when repository or clinical content changes.

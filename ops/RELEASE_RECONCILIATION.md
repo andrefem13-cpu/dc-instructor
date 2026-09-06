@@ -49,3 +49,7 @@ The ten published top complaints all fall back when submitted as chief complaint
 Before release, verify that patient-specific findings, medications and follow-up instructions survive the whole workflow. Static template assertions, broad symptom routing, retired pathways, and the generator's handling of conflicting context need dedicated clinical QA. Add route/fallback aggregation so real usage can guide subsequent work.
 
 Do not resume phase-count expansion by default. Do not infer clinical approval from permission to continue engineering work.
+
+## Recovery follow-up on September 5
+
+The extracted Git bundle was verified and all three commits through `f4612da` were merged into `codex/release-completion-2026-09-05`. The original publishing failure above is historical. Authenticated shell publishing is available. Both handler suites are retained, totaling 11 mocked cases, including logging order and network failure. The full engineering release command passed again on the combined work. No patient-facing library files changed. PR #1 and production remain unchanged; see `RELEASE_COMPLETION.md` for the current plan.
